@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: knowledge-hub-api
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - TOKENIZERS_PARALLELISM=false
+    env_file:
+      - .env
+    volumes:
+      # Mount trained models untuk persistence
+      - ./trained_models:/app/trained_models
+      # Mount data files jika mau update tanpa rebuild
+      - ./graphs.json:/app/graphs.json
+      - ./features.json:/app/features.json
+    restart: unless-stopped
+    networks:
+      - knowledge-hub-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # Optional: Training service (run once to train models)
+  trainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: knowledge-hub-trainer
+    command: python train_models.py
+    volumes:
+      - ./trained_models:/app/trained_models
+      - ./graphs.json:/app/graphs.json
+    networks:
+      - knowledge-hub-network
+    profiles:
+      - training
+
+networks:
+  knowledge-hub-network:
+    driver: bridge

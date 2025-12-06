@@ -1,0 +1,26 @@
+[
+    {
+        "key": "FEAT-1",
+        "summary": "add 'stop' goal to the maven-activemq-plugin",
+        "description": "This would be useful in at least two scenarios. In one of them, we have a hudson building our system, and somehow the shutdown hook never gets called.\n\nThe second scenario is using the maven shell. If we don't stop activemq explicitly, it will be running already in the next build, and cause an error when trying to start a new one.",
+        "components": [],
+        "project": "ActiveMQ Classic",
+        "issuetype": "New Feature",
+        "priority": "Major",
+        "status": "Open",
+        "reporter": "Paulo Siqueira",
+        "methods": []
+    },
+    {
+        "key": "FEAT-2",
+        "summary": "Perform in-place checksum verification to avoid memory copying.",
+        "description": "Unnecessary buffer copying occurs in Checksum.verifyChecksum because it converts the ByteString argument into a byte array.",
+        "components": ["OzoneClient"],
+        "project": "Apache Ozone",
+        "issuetype": "Improvement",
+        "priority": "Major",
+        "status": "Open",
+        "reporter": "Tsz-wo Sze",
+        "methods": []
+    }
+]
