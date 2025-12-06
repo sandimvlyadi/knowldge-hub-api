@@ -441,11 +441,18 @@ Contributions welcome! Please:
 
 ## 📄 License
 
-MIT License
+This project is licensed under the MIT License.
 
 ## 👥 Authors
 
-Knowledge Hub Team
+- **Developer**: Sandi Mulyadi
+
+## 📞 Support
+
+For issues, questions, or contributions, please contact:
+
+- Email: sandimvlyadi@gmail.com
+- Issue Tracker: GitHub Issues
 
 ## 🙏 Acknowledgments
 
